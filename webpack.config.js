@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 
+
 module.exports = {
   entry: [
     'react-hot-loader/patch',
@@ -23,10 +24,14 @@ module.exports = {
     publicPath: '/',
     filename: 'app.bundle.js'
   },
-  watch: true,
+  performance: {
+    hints: false
+  },
+  watch: false,
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
+  devtool: false,
   devServer: {
     contentBase: './dist',
     hot: true,
