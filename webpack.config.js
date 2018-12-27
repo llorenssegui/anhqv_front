@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 module.exports = {
   entry: [
@@ -22,6 +23,7 @@ module.exports = {
     publicPath: '/',
     filename: 'app.bundle.js'
   },
+  watch: true,
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
@@ -29,6 +31,6 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     historyApiFallback: true,
-    port: 3000
+    port: 5000
   }
 };
