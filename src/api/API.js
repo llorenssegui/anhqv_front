@@ -1,4 +1,4 @@
-const HOST = "http://localhost:8080/api";
+const HOST = "https://warm-plateau-81725.herokuapp.com/api";
 
 export default {
     getCharacters: () => {
