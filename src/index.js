@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Header.js';
+import Header from './components/Header/Header.js';
+import Body from './components/Body/Body.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
         return (
             <MuiThemeProvider theme={theme}>
                 <Header></Header>
+                <Body></Body>
             </MuiThemeProvider>
         );
     }
