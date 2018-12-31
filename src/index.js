@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BrowserRouter from 'react-router-dom'; 
 import Header from './components/Header/Header.js';
-import Body from './components/Body/Body.js';
+import Main from './components/Main/Main.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 
@@ -13,11 +14,16 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render () {
         return (
             <MuiThemeProvider theme={theme}>
                 <Header></Header>
-                <Body></Body>
+                <Main></Main>
             </MuiThemeProvider>
         );
     }
