@@ -23,6 +23,10 @@ class Clip extends React.Component {
         super(props);
     }
 
+    onClickClip = () => {
+        this.props.onClickClip(this.props.clip);
+    };
+
     render() {
         const { classes } = this.props;
         return (

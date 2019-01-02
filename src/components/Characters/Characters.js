@@ -12,6 +12,10 @@ class Characters extends React.Component {
         super(props);
     }
 
+    onClickCharacter = (id) => {
+        this.props.onClickCharacter(id);
+    };
+
     render () {
         return (
             <div>
@@ -19,7 +23,7 @@ class Characters extends React.Component {
                 {this.props.characters.map(character => {
                     return(
                         <Grid item md={4} sm={12}>
-                            <Character character={character}></Character>
+                            <Character character={character} onClickCharacter={this.onClickCharacter}></Character>
                         </Grid>
                     );
                 })}  

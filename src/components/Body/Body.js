@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Menu from '../Bottom/Menu.js';
 import Characters from '../Characters/Characters.js';
 import API from '../../api/API.js';
 
@@ -17,7 +16,6 @@ class Body extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            menuSection: 0,
             characters: []
         }
     }
@@ -28,16 +26,15 @@ class Body extends React.Component {
         });
     };
 
-    onChangeMenuSection = (value) => {
-        this.setState({menuSection: value});
+    onClickCharacter = (id) => {
+        this.props.history.push('/personajes/' + id + '/clips');
     };
 
     render() {
         const { classes } = this.props;
         return(
             <div className={classes.root}>
-            <Characters characters={this.state.characters}></Characters>
-            <Menu onChange={this.onChangeMenuSection}></Menu>
+            <Characters characters={this.state.characters} onClickCharacter={this.onClickCharacter}></Characters>
             </div>
         );
     }

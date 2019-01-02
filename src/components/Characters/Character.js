@@ -22,12 +22,8 @@ const styles = {
 
 class Character extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
-    redirectToClips = () => {
-       this.props.history.push('/clips');
+    onClickCharacter = () => {
+        this.props.onClickCharacter(this.props.character.id);
     };
 
     render() {
@@ -35,7 +31,7 @@ class Character extends React.Component {
         return (
             <Card 
             className={classes.card}
-            onClick={this.redirectToClips}>
+            onClick={this.onClickCharacter}>
                 <CardActionArea>
                     <CardMedia
                     className={classes.media}

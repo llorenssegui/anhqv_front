@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Body from '../Body/Body.js';
+import CharacterClips from '../CharacterClips/CharacterClips.js';
 
 class Main extends React.Component {
 
@@ -12,7 +13,8 @@ class Main extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                  <Route path='/personajes' component={Body} />
+                  <Route exact path='/personajes' component={Body} />
+                  <Route exact path='/personajes/:characterId/clips' component={CharacterClips} />
                   <Route path="*" component={Body}/> 
                </Switch>
             </BrowserRouter>

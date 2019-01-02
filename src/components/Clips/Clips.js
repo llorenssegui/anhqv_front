@@ -10,12 +10,16 @@ class Clips extends React.Component {
         super(props);
     }
 
+    onClickClip = (clip) => {
+        this.props.onClickClip(clip);
+    };
+
     render() {
         const { classes } = this.props;
         return (
             <div>
                 {this.props.clips.map(clip => {
-                    <Clip clip={clip}></Clip>
+                    <Clip clip={clip} onClickClip={this.onClickClip}></Clip>
                 })}
             </div>
         );
