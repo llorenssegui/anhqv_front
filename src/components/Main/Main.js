@@ -14,7 +14,7 @@ class Main extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path='/' component={Body} />
+                  <Route exact path='/' component={Body} />
                   <Route exact path='/personajes' component={Body} />
                   <Route exact path='/personajes/:characterId/clips' component={CharacterClips} />
                   <Route exact path='/clips/:clipId' component={ClipPlayer} />
