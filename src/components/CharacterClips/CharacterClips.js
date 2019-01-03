@@ -17,25 +17,18 @@ class CharacterClips extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            character: undefined,
             clips: [],
         }
     }
 
     componentWillMount = () => {
-        let characterId = this.props.match.params.characterId;
-        if(characterId) {
-            API.getCharacter(Number(characterId)).then(response => {
-                this.setState({
-                    character: response,
-                    clips: response.clips ? response.clips : []
-                });
-            });
-        }
+        API.getCharacter(Number(this.props.match.params.characterId)).then(response => {
+            this.setState({clips: response.clips});
+        });
     };
 
     onClickClip = (clip) => {
-        console.log("Selected clip",  clip ? clip.id : "Undefined Clip");
+        this.props.history.push('/clips/' + clip.id);
     };
 
     render() {

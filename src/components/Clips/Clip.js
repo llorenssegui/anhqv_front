@@ -31,16 +31,11 @@ class Clip extends React.Component {
         const { classes } = this.props;
         return (
             <div>
-            <Paper className={classes.root} elevation={1}>
+            <Paper className={classes.root} elevation={1} onClick={this.onClickClip}>
                 <Typography variant="h5" component="h3">
                     {this.props.clip.title}
                 </Typography>
                 <Grid container justify="center" alignItems="center">
-                {this.props.clip.characters.map(character => {
-                    <Grid item xs={12}>
-                        <Avatar alt={character.name} src={character.url_picture} className={classes.avatar} />
-                    </Grid>
-                })}
                 </Grid>
             </Paper>
             </div>
