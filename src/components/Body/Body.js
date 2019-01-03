@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Characters from '../Characters/Characters.js';
+import LoadingGif from '../LoadingGif/LoadingGif.js';
 import API from '../../api/API.js';
 
 const styles = theme => ({
@@ -16,13 +17,14 @@ class Body extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            characters: []
+            characters: [],
+            showLoading: true,
         }
     }
 
     componentWillMount = () => {
         API.getCharacters().then(response => {
-            this.setState({characters: response});
+            this.setState({characters: response, showLoading: false});
         });
     };
 
@@ -35,6 +37,7 @@ class Body extends React.Component {
         return(
             <div className={classes.root}>
             <Characters characters={this.state.characters} onClickCharacter={this.onClickCharacter}></Characters>
+            <LoadingGif show={this.state.showLoading}></LoadingGif>
             </div>
         );
     }

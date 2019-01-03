@@ -39,7 +39,7 @@ class ClipPlayer extends React.Component {
         this.setState({videoId: this.getYoutubeVideoId(response.link)});
         let opts = {
             height: '100%',
-            width: '100%',
+            width: '60%',
             playerVars: { 
                 autoplay: 1,
                 start: response.start,
