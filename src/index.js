@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header/Header.js';
-import Body from './components/Body/Body.js';
+import Main from './components/Main/Main.js';
+import Menu from './components/Bottom/Menu.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
 
@@ -13,11 +14,24 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuSection: 0,
+        }
+    }
+
+    onChangeMenuSection = (value) => {
+        this.setState({menuSection: value});
+    };
+
     render () {
         return (
             <MuiThemeProvider theme={theme}>
                 <Header></Header>
-                <Body></Body>
+                <Main></Main>
+                <Menu onChange={this.onChangeMenuSection}></Menu>
             </MuiThemeProvider>
         );
     }

@@ -11,37 +11,39 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
   card: {
     maxWidth: 345,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   media: {
     height: 140,
+    width: 345,
+    textAlign: 'center',
   },
 };
 
 class Character extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
+    onClickCharacter = () => {
+        this.props.onClickCharacter(this.props.character.id);
+    };
 
     render() {
         const { classes } = this.props;
         return (
-            <Card className={classes.card}>
-            <CardActionArea>
-                <CardMedia
-                className={classes.media}
-                image={this.props.character.url_picture}
-                title={this.props.character.name}
-                />
-                <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {this.props.character.name}
-                </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-            </CardActions>
+            <Card 
+            className={classes.card}
+            onClick={this.onClickCharacter}>
+                <CardActionArea>
+                    <CardMedia
+                    className={classes.media}
+                    image={this.props.character.url_picture}
+                    title={this.props.character.name}
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {this.props.character.name}
+                    </Typography>
+                    </CardContent>
+                </CardActionArea>
             </Card>
         );
     }
