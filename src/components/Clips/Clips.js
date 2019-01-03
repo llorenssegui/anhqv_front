@@ -19,7 +19,9 @@ class Clips extends React.Component {
         return (
             <div>
                 {this.props.clips.map(clip => {
+                    return(
                     <Clip clip={clip} onClickClip={this.onClickClip}></Clip>
+                    );
                 })}
             </div>
         );
