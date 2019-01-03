@@ -17,4 +17,12 @@ export default {
             },
         }).then(res => res.json());
     },
+    getClip: (id) => {
+        return fetch(HOST + '/clips/' + id + '/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => res.json());
+    },
 };

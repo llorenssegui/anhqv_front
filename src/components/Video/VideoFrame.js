@@ -5,17 +5,6 @@ class VideoFrame extends React.Component {
 
     constructor(props) {
         super(props);
-        
-        this.state = {
-            height: '100%',
-            width: '100%',
-            playerVars: { 
-                autoplay: 1,
-                start: 810,
-                end: 819,
-
-            }
-        };
     }
 
     onReadyVideo = (event) => {
@@ -25,8 +14,8 @@ class VideoFrame extends React.Component {
     render () {
         return(
             <YouTube
-                videoId="BRL_H8uMDCM"
-                opts={this.state}
+                videoId={this.props.videoId}
+                opts={this.props.opts}
                 onReady={this.onReadyVideo}
             />
         );
