@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import VideoFrame from '../Video/VideoFrame.js';
-import API from '../../api/API';
+import API from '../../api/API.js';
+import Utils from '../../utils/Utils.js';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
@@ -33,28 +34,25 @@ class ClipPlayer extends React.Component {
     }
 
     componentWillMount = () => {
-      API.getClip(Number(this.props.match.params.clipId)).then(response => {
-        this.setState({clip: response});
-        this.setState({characters: response.characters});
-        this.setState({videoId: this.getYoutubeVideoId(response.link)});
-        let opts = {
-            height: '100%',
-            width: '60%',
-            playerVars: { 
-                autoplay: 1,
-                start: response.start,
-                end: response.end,
+        let clipId =  this.props.match.params.clipId;
+        API.getClip(Number(clipId)).then(response => {
+            let opts = {
+                height: '100%',
+                width: '60%',
+                playerVars: { 
+                    autoplay: 1,
+                    start: response.start,
+                    end: response.end,
 
-            }
-        };
-        this.setState({opts: opts});
-      });
-    };
-
-    getYoutubeVideoId = (url) => {
-        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-        var match = url.match(regExp);
-        return (match&&match[7].length==11)? match[7] : false;
+                }
+            };
+            this.setState({
+                clip: response,
+                characters: response.characters,
+                videoId: Utils.getYoutubeVideoId(response.link),
+                opts: opts
+            });
+        });
     };
 
     onClickCharacter = (charcter) => {

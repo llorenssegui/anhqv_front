@@ -9,7 +9,7 @@ class Clips extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            clips: new Array(),
+            clips: [],
         }
     }
 
@@ -17,18 +17,10 @@ class Clips extends React.Component {
         this.props.onClickClip(clip);
     };
 
-    componentWillReceiveProps = (newProps) => {
-        for(let i = 0; i < newProps.clips.length; i++) {
-            this.state.clips.push(newProps.clips[i]);
-        }
-        console.log(this.state.clips);
-    };
-
     render() {
-        const { classes } = this.props;
         return (
             <div>
-                {this.state.clips.map(clip => {
+                {this.props.clips.map(clip => {
                     return(
                     <Clip clip={clip} onClickClip={this.onClickClip}></Clip>
                     );

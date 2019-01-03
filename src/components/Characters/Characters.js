@@ -18,7 +18,6 @@ class Characters extends React.Component {
 
     render () {
         return (
-            <div>
             <Grid container spacing={24}>    
                 {this.props.characters.map(character => {
                     return(
@@ -28,7 +27,6 @@ class Characters extends React.Component {
                     );
                 })}  
             </Grid>
-            </div>
         );
     };
 
