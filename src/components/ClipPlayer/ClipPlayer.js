@@ -17,6 +17,9 @@ const styles = {
         width: 60,
         height: 60,
     },
+    mousePointer: {
+        cursor: 'pointer',
+    }
 };
 
 class ClipPlayer extends React.Component {
@@ -37,8 +40,8 @@ class ClipPlayer extends React.Component {
         let clipId =  this.props.match.params.clipId;
         API.getClip(Number(clipId)).then(response => {
             let opts = {
-                height: '100%',
-                width: '60%',
+                height: '600px',
+                width: '100%',
                 playerVars: { 
                     autoplay: 1,
                     start: response.start,
@@ -63,7 +66,15 @@ class ClipPlayer extends React.Component {
         const { classes } = this.props;
         return(
             <div className={classes.root}>
-                <VideoFrame videoId={this.state.videoId} opts={this.state.opts}></VideoFrame>
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    style={{height: '600px', width: '100%'}}
+                >
+                    <VideoFrame videoId={this.state.videoId} opts={this.state.opts}></VideoFrame>
+                </Grid>
                 <Grid container justify="center" alignItems="center">
                 {this.state.characters.map(character => {
                     return(

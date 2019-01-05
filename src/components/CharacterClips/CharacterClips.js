@@ -52,6 +52,7 @@ class CharacterClips extends React.Component {
                     characterName={this.state.characterName}
                 />
             </div>
+            <hr/>
             <Grid container>
                 <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
             </Grid>
