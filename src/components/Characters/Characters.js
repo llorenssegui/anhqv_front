@@ -1,10 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Character from './Character.js'
-
-const styles= {};
 
 class Characters extends React.Component {
 
@@ -22,7 +18,7 @@ class Characters extends React.Component {
                 {this.props.characters.map(character => {
                     return(
                         <Grid item md={4} sm={12}>
-                            <Character character={character} onClickCharacter={this.onClickCharacter}></Character>
+                            <Character character={character} onClickCharacter={this.onClickCharacter}/>
                         </Grid>
                     );
                 })}  
@@ -31,9 +27,5 @@ class Characters extends React.Component {
     };
 
 }
-
-Characters.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
   
-export default withStyles(styles)(Characters);
+export default Characters;

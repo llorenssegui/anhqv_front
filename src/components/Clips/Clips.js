@@ -1,7 +1,13 @@
 import React from 'react';
 import Clip from './Clip.js';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 const styles = {
+    mouse: {
+        cursor: 'pointer'
+    }
 };
 
 class Clips extends React.Component {
@@ -18,16 +24,23 @@ class Clips extends React.Component {
     };
 
     render() {
+        const {classes} = this.props;
         return (
-            <div>
+            <Grid container spacing={24}>
                 {this.props.clips.map(clip => {
                     return(
-                    <Clip clip={clip} onClickClip={this.onClickClip}></Clip>
+                    <Grid item md={6} sm={12}>
+                        <Clip clip={clip} onClickClip={this.onClickClip} className={classes.mouse}></Clip>
+                    </Grid>
                     );
                 })}
-            </div>
+            </Grid>
         );
     };
 }
 
-export default Clips;
+Clips.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+  
+export default withStyles(styles)(Clips);
