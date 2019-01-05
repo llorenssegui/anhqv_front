@@ -9,7 +9,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 const styles = {
   root: {
     width: '100%',
-  },
+    overflow: 'hidden',
+    position: 'fixed',
+    bottom: 0
+  }
 };
 
 class Menu extends React.Component {

@@ -10,9 +10,8 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 const styles = theme => ({
   fab: {
     margin: theme.spacing.unit,
-    margin: theme.spacing.unit,
     position: 'fixed',
-    bottom: theme.spacing.unit * 3,
+    bottom: theme.spacing.unit * 5,
     right: theme.spacing.unit * 3,
   },
 });
