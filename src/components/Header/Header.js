@@ -40,7 +40,7 @@ class Header extends React.Component {
                     </IconButton>
                     
                         <Typography variant="h6" color="inherit" className={classes.grow}>
-                            <Link to="/">Aqui no hay Quien Viva</Link>
+                            Aqui no hay Quien Viva
                         </Typography>
                     </Toolbar>
                 </AppBar>

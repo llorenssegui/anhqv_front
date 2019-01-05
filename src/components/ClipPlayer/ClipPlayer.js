@@ -7,7 +7,7 @@ import Utils from '../../utils/Utils.js';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
-const styles = theme => ({
+const styles = {
     root: {
       flexGrow: 1,
       margin: '15px'
@@ -17,7 +17,7 @@ const styles = theme => ({
         width: 60,
         height: 60,
     },
-});
+};
 
 class ClipPlayer extends React.Component {
 

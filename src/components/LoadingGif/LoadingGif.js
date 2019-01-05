@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const styles = {
+const styles = theme => ({
     root: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        margiTop: '-50px',
-        marginLeft: '-50px',
-        width: '100px',
-        height: '100px'
-    }
-};
+        flexGrow: 1,
+    },
+    bigAvatar: {
+        width: '340px',
+        height: '340px',
+    },
+    rogress: {
+        margin: theme.spacing.unit * 2,
+    },
+});
 
 class LoadingGif extends React.Component {
 
@@ -28,10 +32,28 @@ class LoadingGif extends React.Component {
         return(
             <div className={classes.root}>
                 {this.props.show &&
-                    <div>
-                        <img src={this.state.src}></img>
-                        <h4>Cargando...</h4>
-                    </div>
+                    <Grid container>
+                        <Grid xs={12}>
+                            <Grid
+                                container
+                                direction="row"
+                                justify="center"
+                                alignItems="flex-end"
+                            >
+                                <Avatar src={this.state.src} style={{marginTop: '10%', width: '340px', height: '340px',}} className={classes.bigAvatar}/>
+                            </Grid>
+                        </Grid>
+                        <Grid xs={12}>
+                            <Grid
+                                    container
+                                    direction="row"
+                                    justify="center"
+                                    alignItems="flex-end"
+                                >
+                                <h4>Cargando <CircularProgress className={classes.progress} size={12}/></h4>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 }
             </div>
         );
