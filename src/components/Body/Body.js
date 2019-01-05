@@ -8,7 +8,10 @@ import API from '../../api/API.js';
 const styles = theme => ({
     root: {
       flexGrow: 1,
-      margin: '15px'
+      marginTop: '15px',
+      marginBottom: '150px',
+      marginRight: '15px',
+      marginLeft: '15px',
     },
 });
 
