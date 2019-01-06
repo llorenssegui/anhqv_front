@@ -10,7 +10,10 @@ import Grid from '@material-ui/core/Grid';
 const styles = {
     root: {
       flexGrow: 1,
-      margin: '15px'
+      marginTop: '15px',
+      marginBottom: '150px',
+      marginRight: '15px',
+      marginLeft: '15px',
     },
     bigAvatar: {
         margin: 10,
@@ -78,7 +81,7 @@ class ClipPlayer extends React.Component {
                 <Grid container justify="center" alignItems="center">
                 {this.state.characters.map(character => {
                     return(
-                        <Grid xs="1" onClick={() =>this.onClickCharacter(character)}>
+                        <Grid item xs={1} onClick={() =>this.onClickCharacter(character)}>
                             <Avatar alt={character.name} src={character.url_picture} className={classes.bigAvatar} />
                         </Grid> 
                     );

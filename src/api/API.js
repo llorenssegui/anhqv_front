@@ -27,4 +27,10 @@ export default {
             headers: functions.buildHeaders()
         }).then(res => res.json());
     },
+    getEpisodes: () => {
+        return fetch(HOST + '/episodes/', {
+            method: 'GET',
+            headers: functions.buildHeaders()
+        }).then(res => res.json());
+    },
 };
