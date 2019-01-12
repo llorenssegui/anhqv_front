@@ -18,6 +18,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import API from '../../api/API.js';
 import TimeClipInput from '../FormatedInputs/TimeClipInput.js';
+import MultipleSelect from '../MultipleSelect/MultipleSelect.js';
 
 const styles = theme => ({
   root: {
@@ -56,6 +57,7 @@ class ClipForm extends React.Component {
         link: "",
         episodes: [],
         characters: [],
+        selectedCharacters: [],
         episode: -1,
         start: "",
         end: "",
@@ -85,6 +87,10 @@ class ClipForm extends React.Component {
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onChangeSelect = (selectedIds) => {
+    this.setState({selectedCharacters: selectedIds});
   };
 
   render() {
@@ -174,6 +180,13 @@ class ClipForm extends React.Component {
                 value={this.state.end}
                 handleChange={this.onChangeTimeClipInput}
               />
+            </Grid>
+            <Grid item xs={12}>
+              <MultipleSelect 
+                obj={this.state.characters}
+                placeholder={'Personajes'}
+                onChangeSelect={this.onChangeSelect}
+                />
             </Grid>
           </Grid>
           </form>
