@@ -17,7 +17,9 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import API from '../../api/API.js';
 import TimeClipInputByUnity from '../FormatedInputs/TimeClipInputByUnity.js';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import MultipleSelect from '../MultipleSelect/MultipleSelect.js';
+import Utils from '../../utils/Utils.js';
 
 const styles = theme => ({
   root: {
@@ -47,6 +49,8 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+const DEFAULT_FORM_ERROR_MESSAGE = "Error al validar el formulario. Comprueba los todos los campos."
+
 class ClipForm extends React.Component {
 
   constructor(props) {
@@ -60,6 +64,8 @@ class ClipForm extends React.Component {
         episode: -1,
         start: "",
         end: "",
+        formErrorMessage: DEFAULT_FORM_ERROR_MESSAGE,
+        isFormError: false,
       }
   }
 
@@ -73,8 +79,66 @@ class ClipForm extends React.Component {
   };
 
   handleSubmit = () => {
-    this.props.handleClose();
-    this.props.submitForm();
+    if(this.formIsValid()) {
+      let clip = {
+        title: this.state.title,
+        link: this.state.link,
+        start: Number(this.state.start),
+        end: Number(this.state.end),
+        episode: {
+          title: this.state.episodes[this.state.episode].title
+        },
+        characters: this.state.selectedCharacters
+      };
+      API.addClip(clip).then(response => {
+        console.log(response);
+        this.props.handleClose();
+      });
+    } else {
+      this.setState({ isFormError: true });
+      console.log("Formulario invalido");
+    }
+  };
+
+  formIsValid = () => {
+    debugger;
+    this.setState({formErrorMessage: ""});
+    if(!this.state.title || this.state.title === "") {
+      return false;
+    }
+    if(!this.state.link || this.state.link === "" || Utils.getYoutubeVideoId() === false) {
+      this.setState({
+        formErrorMessage: "La URL introducida no corresponde a una URL de Youtube"
+      });
+      return false;
+    }
+    if(!this.state.episode || this.state.link === -1) {
+      return false;
+    }
+    if(!this.state.selectedCharacters || this.state.selectedCharacters.length < 1) {
+      return false;
+    }
+    if(!this.state.start || isNaN(this.state.start)) {
+      return false;
+    }
+    if(!this.state.end || isNaN(this.state.end)) {
+      return false;
+    }
+    if(this.state.start >= this.state.end) {
+      let message = this.state.formErrorMessage;
+      const errorMessage = "El tiempo de fin ha de ser mayor al tiempo de inicio";
+      if(!message || message === "") {
+        message = errorMessage;
+      } else {
+        message += "\n" + errorMessage;
+      }
+      this.setState({
+        formErrorMessage: message
+      });
+      return false;
+    }
+    this.setState({formErrorMessage: DEFAULT_FORM_ERROR_MESSAGE});
+    return true;
   };
 
   handleChange = event => {
@@ -82,9 +146,7 @@ class ClipForm extends React.Component {
   };
 
   onTimeChange = (id, time) => {
-    debugger;
     this.setState({[id]: time});
-    console.log(this.state);
   };
 
   onChangeSelect = (selectedIds) => {
@@ -114,14 +176,16 @@ class ClipForm extends React.Component {
               </Button>
             </Toolbar>
           </AppBar>
-          <form className={classes.container} noValidate autoComplete="off">
+          <form className={classes.container} autoComplete="off">
           <Grid container>
             <Grid item xs={12}>
               <TextField
                 required
                 id="title"
+                name="title"
                 label="Título Clip"
                 value={this.state.title}
+                onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
               />
@@ -130,8 +194,10 @@ class ClipForm extends React.Component {
               <TextField
                 required
                 id="link"
+                name="link"
                 label="URL Youtube"
                 value={this.state.link}
+                onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
               />
@@ -151,9 +217,9 @@ class ClipForm extends React.Component {
                   <MenuItem value={-1}>
                     <em>Capitulo</em>
                   </MenuItem>
-                  {this.state.episodes.map(episode => {
+                  {this.state.episodes.map((episode, index) => {
                     return(
-                    <MenuItem value={episode.id}>{episode.long_title}</MenuItem>
+                    <MenuItem value={index}>{episode.long_title}</MenuItem>
                     );
                   })}
                 </Select>
@@ -178,6 +244,9 @@ class ClipForm extends React.Component {
                 onChangeSelect={this.onChangeSelect}
                 />
             </Grid>
+            {this.state.isFormError && 
+              <FormHelperText>{this.state.formErrorMessage}</FormHelperText>
+            }
           </Grid>
           </form>
         </Dialog>

@@ -33,4 +33,11 @@ export default {
             headers: functions.buildHeaders()
         }).then(res => res.json());
     },
+    addClip: (clip) => {
+        return fetch(HOST + '/clips/', {
+            method: 'POST',
+            headers: functions.buildHeaders(),
+            body: JSON.stringify(clip)
+        }).then(res => res.json());
+    }
 };

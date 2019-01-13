@@ -37,10 +37,6 @@ class App extends React.Component {
         this.setState({showClipForm: false});
     };
 
-    submitForm = () => {
-
-    };
-
     render () {
         return (
             <MuiThemeProvider theme={theme}>
@@ -51,8 +47,7 @@ class App extends React.Component {
                 <ClipForm   
                     open={this.state.showClipForm}
                     handleClose={this.unshowClipForm}
-                    submitForm={this.submitForm}>
-                </ClipForm>
+                />
             </MuiThemeProvider>
         );
     }
