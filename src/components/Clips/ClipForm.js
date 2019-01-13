@@ -7,7 +7,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,7 +16,7 @@ import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import API from '../../api/API.js';
-import TimeClipInput from '../FormatedInputs/TimeClipInput.js';
+import TimeClipInputByUnity from '../FormatedInputs/TimeClipInputByUnity.js';
 import MultipleSelect from '../MultipleSelect/MultipleSelect.js';
 
 const styles = theme => ({
@@ -78,15 +77,14 @@ class ClipForm extends React.Component {
     this.props.submitForm();
   };
 
-  onChangeTimeClipInput = (name, value) => {
-    this.setState({
-      [name]: value,
-    });
-    console.log(name, this.state[name]);
-  };
-
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onTimeChange = (id, time) => {
+    debugger;
+    this.setState({[id]: time});
+    console.log(this.state);
   };
 
   onChangeSelect = (selectedIds) => {
@@ -162,24 +160,16 @@ class ClipForm extends React.Component {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <TimeClipInput
-                required={true} 
-                id={'start'} 
-                name={'start'}
-                label={'Instante de inicio (hh:mm:ss)'}
-                value={this.state.start}
-                handleChange={this.onChangeTimeClipInput}
-              />
+              <TimeClipInputByUnity
+                id="start"
+                label="Tiempo de inicio del video"
+                onTimeChange={this.onTimeChange}/>
             </Grid>
             <Grid item xs={12}>
-              <TimeClipInput
-                required={true}  
-                id={'end'} 
-                name={'end'}
-                label={'Instante de fin (hh:mm:ss)'}
-                value={this.state.end}
-                handleChange={this.onChangeTimeClipInput}
-              />
+              <TimeClipInputByUnity 
+                id="end"
+                label="Tiempo de fin del video"
+                onTimeChange={this.onTimeChange}/>
             </Grid>
             <Grid item xs={12}>
               <MultipleSelect 
