@@ -85,9 +85,7 @@ class ClipForm extends React.Component {
         link: this.state.link,
         start: Number(this.state.start),
         end: Number(this.state.end),
-        episode: {
-          title: this.state.episodes[this.state.episode].title
-        },
+        episode: this.state.episodes[this.state.episode].id,
         characters: this.state.selectedCharacters
       };
       API.addClip(clip).then(response => {

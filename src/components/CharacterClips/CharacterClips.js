@@ -5,6 +5,7 @@ import Clips from '../Clips/Clips.js';
 import API from '../../api/API.js';
 import Grid from '@material-ui/core/Grid';
 import CharacterProfile from '../Characters/CharacterProfile.js';
+import LoadingGif from '../LoadingGif/LoadingGif.js';
 
 const styles = theme => ({
     root: {
@@ -24,7 +25,8 @@ class CharacterClips extends React.Component {
         this.state = {
             clips: [],
             characterName: undefined,
-            characterUrlPicture: undefined
+            characterUrlPicture: undefined,
+            showLoading: true
         }
     }
 
@@ -33,7 +35,8 @@ class CharacterClips extends React.Component {
             this.setState({
                 clips: response.clips,
                 characterName: response.name,
-                characterUrlPicture: response.url_picture
+                characterUrlPicture: response.url_picture,
+                showLoading: false
             });
         });
     };
@@ -56,6 +59,7 @@ class CharacterClips extends React.Component {
             <Grid container>
                 <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
             </Grid>
+            <LoadingGif show={this.state.showLoading}></LoadingGif>
             </div>
         );
     }
