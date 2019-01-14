@@ -106,7 +106,7 @@ class ClipForm extends React.Component {
     if(!this.state.title || this.state.title === "") {
       return false;
     }
-    if(!this.state.link || this.state.link === "" || Utils.getYoutubeVideoId() === false) {
+    if(!this.state.link || this.state.link === "" || Utils.getYoutubeVideoId(this.state.link) === false) {
       this.setState({
         formErrorMessage: "La URL introducida no corresponde a una URL de Youtube"
       });
