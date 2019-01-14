@@ -49,24 +49,25 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const DEFAULT_FORM_ERROR_MESSAGE = "Error al validar el formulario. Comprueba los todos los campos."
+const DEFAULT_FORM_ERROR_MESSAGE = "Error al validar el formulario. Comprueba los todos los campos.";
+let defaultState = {
+  title: "",
+  link: "",
+  episodes: [],
+  characters: [],
+  selectedCharacters: [],
+  episode: -1,
+  start: 0,
+  end: 0,
+  formErrorMessage: DEFAULT_FORM_ERROR_MESSAGE,
+  isFormError: false,
+};
 
 class ClipForm extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = {
-        title: "",
-        link: "",
-        episodes: [],
-        characters: [],
-        selectedCharacters: [],
-        episode: -1,
-        start: "",
-        end: "",
-        formErrorMessage: DEFAULT_FORM_ERROR_MESSAGE,
-        isFormError: false,
-      }
+      this.state = defaultState;
   }
 
   componentWillMount = () => {
@@ -79,14 +80,16 @@ class ClipForm extends React.Component {
   };
 
   handleSubmit = () => {
-    if(this.formIsValid()) {
+    if(this.isFormValid()) {
+      let characterIds = [];
+      this.state.selectedCharacters.forEach(character => characterIds.push(character.id));
       let clip = {
         title: this.state.title,
         link: this.state.link,
         start: Number(this.state.start),
         end: Number(this.state.end),
         episode: Number(this.state.episodes[this.state.episode].id),
-        characters: this.state.selectedCharacters
+        characters: characterIds
       };
       API.addClip(clip).then(response => {
         console.log(response);
@@ -94,12 +97,10 @@ class ClipForm extends React.Component {
       });
     } else {
       this.setState({ isFormError: true });
-      console.log("Formulario invalido");
     }
   };
 
-  formIsValid = () => {
-    debugger;
+  isFormValid = () => {
     this.setState({formErrorMessage: ""});
     if(!this.state.title || this.state.title === "") {
       return false;
@@ -110,16 +111,16 @@ class ClipForm extends React.Component {
       });
       return false;
     }
-    if(!this.state.episode || this.state.link === -1) {
+    if(this.state.episode === undefined || this.state.episode === null || this.state.episode === -1) {
       return false;
     }
     if(!this.state.selectedCharacters || this.state.selectedCharacters.length < 1) {
       return false;
     }
-    if(!this.state.start || isNaN(this.state.start)) {
+    if(this.state.start === undefined || this.state.start === null || isNaN(this.state.start)) {
       return false;
     }
-    if(!this.state.end || isNaN(this.state.end)) {
+    if(this.state.end === undefined || this.state.end === null || isNaN(this.state.end)) {
       return false;
     }
     if(this.state.start >= this.state.end) {
@@ -139,6 +140,10 @@ class ClipForm extends React.Component {
     return true;
   };
 
+  clearForm = () => {
+    this.setState(defaultState);
+  };
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -147,8 +152,8 @@ class ClipForm extends React.Component {
     this.setState({[id]: time});
   };
 
-  onChangeSelect = (selectedIds) => {
-    this.setState({selectedCharacters: selectedIds});
+  onChangeSelect = (characters) => {
+    this.setState({selectedCharacters: characters});
   };
 
   render() {

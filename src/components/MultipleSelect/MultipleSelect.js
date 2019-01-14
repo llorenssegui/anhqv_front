@@ -64,7 +64,7 @@ class MultipleSelect extends React.Component {
       name: event.target.value,
       selectedObjects: selectedObjects,
     });
-    this.props.onChangeSelect(this.state.selectedObjects);
+    this.props.onChangeSelect(selectedObjects);
   };
 
   joinStringArray = (array) => {
@@ -72,10 +72,10 @@ class MultipleSelect extends React.Component {
     if(array) {
       for(let i = 0; i < array.length; i++) {
         let find = this.props.obj[array[i]];
-        if(find) str += find.name; + ', '
+        if(find) str += find.name + ', '
       }
     }
-    debugger;
+    if(str && str.length > 1) str = str.substring(0, str.length - 2);
     return str;
   };
 
