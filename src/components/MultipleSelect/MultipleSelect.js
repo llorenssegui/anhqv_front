@@ -75,6 +75,7 @@ class MultipleSelect extends React.Component {
         if(find) str += find.name; + ', '
       }
     }
+    debugger;
     return str;
   };
 
