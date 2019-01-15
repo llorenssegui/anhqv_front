@@ -57,6 +57,7 @@ class TimeClipInputByUnity extends React.Component {
                 <FormControl className={classes.formControl}>
                     <TextField
                     required
+                    error={this.props.error === true}
                     id="hour"
                     label="Hora"
                     defaultValue="0"
@@ -64,13 +65,14 @@ class TimeClipInputByUnity extends React.Component {
                     onChange={this.handleChange('hour')}
                     margin="normal"
                     variant="outlined"
-                    inputType="number"
+                    type="number"
                     />
                 </FormControl>
             </Grid>
             <Grid item xs={4}>
                 <FormControl className={classes.formControl}>
                     <TextField
+                    error={this.props.error === true}
                     required
                     id="minute"
                     label="Minuto"
@@ -79,13 +81,14 @@ class TimeClipInputByUnity extends React.Component {
                     onChange={this.handleChange('minute')}
                     margin="normal"
                     variant="outlined"
-                    inputType="number"
+                    type="number"
                     />
                 </FormControl>
             </Grid>
             <Grid item xs={4}>
                 <FormControl className={classes.formControl}>
                     <TextField
+                    error={this.props.error === true}
                     required
                     id="second"
                     label="Segundo"
@@ -94,7 +97,7 @@ class TimeClipInputByUnity extends React.Component {
                     onChange={this.handleChange('second')}
                     margin="normal"
                     variant="outlined"
-                    inputType="number"
+                    type="number"
                     />
                 </FormControl>
             </Grid>
