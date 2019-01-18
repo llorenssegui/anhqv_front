@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.7.1",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/styles": "^3.0.0-alpha.8",
     "babel-core": "^6.23.1",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",

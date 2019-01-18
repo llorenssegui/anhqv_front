@@ -23,6 +23,7 @@ import Utils from '../../utils/Utils.js';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import YoutubeIcon from '../../icons/YoutubeIcon.js';
 import TitleIcon from '../../icons/TitleIcon.js';
+import MySnackbar from '../Snackbar/MySnackbar.js'
 
 const styles = theme => ({
   root: {
@@ -45,6 +46,9 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120,
+  },
+  messageContent: {
+    margin: '10px'
   }
 });
 
@@ -109,7 +113,8 @@ class ClipForm extends React.Component {
         characters: characterIds
       };
       API.addClip(clip).then(response => {
-        this.setState({ isFormSucces: false });
+        this.setState({ isFormSucces: true });
+        setTimeout(() => this.setState({ isFormSucces: false }), 3000);
         this.clearForm();
         this.handleClose();
       });
@@ -307,6 +312,16 @@ class ClipForm extends React.Component {
             }
           </Grid>
           </form>
+          <div className={classes.messageContent}>
+            <Typography variant="subheading" gutterBottom align="center">
+              Los clips serán validados por los administradores de este portal antes de ser publicados.
+            </Typography>
+          </div>
+          <MySnackbar 
+            open={this.state.isFormSucces} 
+            text={'Clip creado correctamente! Una vez validado se publicará en el portal.'}
+            onClose={this.onCloseSnackbar}
+          />
         </Dialog>
       </div>
     );
