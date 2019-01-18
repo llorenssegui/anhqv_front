@@ -23,7 +23,7 @@ import Utils from '../../utils/Utils.js';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import YoutubeIcon from '../../icons/YoutubeIcon.js';
 import TitleIcon from '../../icons/TitleIcon.js';
-import MySnackbar from '../Snackbar/MySnackbar.js'
+import MySnackbar from '../Snackbar/MySnackbar.js';
 
 const styles = theme => ({
   root: {
@@ -130,15 +130,13 @@ class ClipForm extends React.Component {
 
   isFormValid = () => {
     let valid = true;
-    this.setState({formErrorMessage: ""});
+    let finalMessage = "";
     if(!this.state.title || this.state.title === "") {
       this.state.errorForm.title = true;
       valid = false;
     }
     if(!this.state.link || this.state.link === "" || Utils.getYoutubeVideoId(this.state.link) === false) {
-      this.setState({
-        formErrorMessage: "La URL introducida no corresponde a una URL de Youtube"
-      });
+      finalMessage = "La URL introducida no corresponde a una URL de Youtube";
       this.state.errorForm.link = true;
       valid = false;
     }
@@ -159,21 +157,21 @@ class ClipForm extends React.Component {
       valid = false;
     }
     if(this.state.start >= this.state.end) {
-      let message = this.state.formErrorMessage;
+      let message = finalMessage;
       const errorMessage = "El tiempo de fin ha de ser mayor al tiempo de inicio";
-      if(!message || message === "") {
-        message = errorMessage;
-      } else {
-        message += "\n" + errorMessage;
+      if(message.indexOf(errorMessage) === -1) {
+        if(!message || message === "") {
+          message = errorMessage;
+        } else {
+          message += "\n" + errorMessage;
+        }
+        finalMessage = message;
       }
-      this.setState({
-        formErrorMessage: message
-      });
       this.state.errorForm.end = true;
       this.state.errorForm.start = true;
       valid = false;
     }
-    if(valid) this.setState({formErrorMessage: DEFAULT_FORM_ERROR_MESSAGE});
+    if(!valid) this.setState({formErrorMessage: finalMessage});
     return valid;
   };
 
@@ -307,12 +305,14 @@ class ClipForm extends React.Component {
                 onChangeSelect={this.onChangeSelect}
                 />
             </Grid>
-            {this.state.isFormError && 
-              <FormHelperText>{this.state.formErrorMessage}</FormHelperText>
-            }
           </Grid>
           </form>
           <div className={classes.messageContent}>
+            {this.state.isFormError && 
+              <Typography variant="subheading" gutterBottom align="center" color="error">
+              {this.state.formErrorMessage}
+              </Typography>
+            }
             <Typography variant="subheading" gutterBottom align="center">
               Los clips serán validados por los administradores de este portal antes de ser publicados.
             </Typography>

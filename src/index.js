@@ -6,12 +6,13 @@ import Menu from './components/Bottom/Menu.js';
 import ClipForm from './components/Clips/ClipForm.js';
 import FloatingActionButton from './components/FloatingActionButtons/FloatingActionButton.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { orange } from '@material-ui/core/colors';
+import { orange, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
     palette: {
         primary: orange,
         secondary: orange,
+        error: red
     },
 });
 
