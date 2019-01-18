@@ -16,6 +16,8 @@ const theme = createMuiTheme({
     },
 });
 
+let t = process.env.API_URL;
+
 class App extends React.Component {
 
     constructor(props) {

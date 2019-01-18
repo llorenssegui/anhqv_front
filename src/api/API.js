@@ -1,4 +1,4 @@
-const HOST = "https://warm-plateau-81725.herokuapp.com/api";
+const HOST = "" + process.env.API_URL;
 
 let functions = {
     buildHeaders: () => {
