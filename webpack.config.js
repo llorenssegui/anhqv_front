@@ -9,7 +9,10 @@ if(env) {
     return prev;
   }, {});
 } else {
-  envKeys = process && process.env ? process.env : {};
+  envKeys = Object.keys(process.env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+  }, {});
 }
 
 module.exports = {
