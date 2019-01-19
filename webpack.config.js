@@ -1,19 +1,14 @@
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 
-const env = dotenv.config().parsed;
-let envKeys = {};
-if(env) {
-  envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
-} else {
-  envKeys = Object.keys(process.env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
-}
+let env = dotenv.config().parsed;
+
+if(env === undefined || env === null) env = process.env;
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   entry: [
