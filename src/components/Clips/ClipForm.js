@@ -17,13 +17,13 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import API from '../../api/API.js';
 import TimeClipInputByUnity from '../FormatedInputs/TimeClipInputByUnity.js';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import MultipleSelect from '../MultipleSelect/MultipleSelect.js';
 import Utils from '../../utils/Utils.js';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import YoutubeIcon from '../../icons/YoutubeIcon.js';
 import TitleIcon from '../../icons/TitleIcon.js';
 import MySnackbar from '../Snackbar/MySnackbar.js';
+import Recaptcha from '../Recaptcha/Recaptcha.js';
 
 const styles = theme => ({
   root: {
@@ -68,7 +68,8 @@ let defaultState = {
   end: 0,
   formErrorMessage: DEFAULT_FORM_ERROR_MESSAGE,
   isFormError: false,
-  isFormSucces: false
+  isFormSucces: false,
+  isRecaptchaOpen: false
 };
 
 class ClipForm extends React.Component {
@@ -196,6 +197,10 @@ class ClipForm extends React.Component {
     this.setState({ isFormSucces: false });
   };
 
+  handleCloseRecaptcha = () => {
+    this.setState({ isRecaptchaOpen: false });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -317,6 +322,10 @@ class ClipForm extends React.Component {
               Los clips serán validados por los administradores de este portal antes de ser publicados.
             </Typography>
           </div>
+          <Recaptcha 
+            open={this.state.isRecaptchaOpen === false}
+            onClose={this.handleCloseRecaptcha}
+          />
           <MySnackbar 
             open={this.state.isFormSucces} 
             text={'Clip creado correctamente! Una vez validado se publicará en el portal.'}
