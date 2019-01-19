@@ -8,9 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import ReCAPTCHA from "react-google-recaptcha";
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const TEST_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || "";
+const DELAY = 1500;
 
 class Recaptcha extends React.Component {
 
@@ -20,17 +21,28 @@ class Recaptcha extends React.Component {
       this.state = {
         callback: "not fired",
         value: "[empty]",
+        load: false,
         expired: "false"
       };
   }
+
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({ load: true });
+    }, DELAY);
+  };
 
   handleClose = () => {
     this.props.onClose();
   };
 
   handleRecaptchaChange = value => {
-    this.setState({ value });
-    if (value === null) this.setState({ expired: "true" });
+    this.setState({ value: value });
+    if (value === null) { 
+      this.setState({ expired: "true" });
+      return;
+    }
+    this.props.onSubmit();
   };
 
   asyncScriptOnLoad = () => {
@@ -46,14 +58,25 @@ class Recaptcha extends React.Component {
             aria-labelledby="responsive-dialog-title"
           >
             <DialogContent>
+                {this.state.load === true &&
                 <ReCAPTCHA
                     theme="dark"
+                    size="compact"
                     ref={this._reCaptchaRef}
                     sitekey={TEST_SITE_KEY}
                     onChange={this.handleRecaptchaChange}
                     asyncScriptOnLoad={this.asyncScriptOnLoad}
                 />
+                }
+                {this.state.load === false &&
+                  <CircularProgress />
+                }
             </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancelar
+              </Button>
+            </DialogActions>
           </Dialog>
         </div>
       );

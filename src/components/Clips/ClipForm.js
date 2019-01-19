@@ -101,8 +101,15 @@ class ClipForm extends React.Component {
     });
   };
 
-  handleSubmit = () => {
+  handleRecaptcha = () => {
     if(this.isFormValid()) {
+      this.setState({ isRecaptchaOpen: true });
+    } else {
+      this.setState({ isFormError: true });
+    }
+  };
+
+  handleSubmit = () => {
       let characterIds = [];
       this.state.selectedCharacters.forEach(character => characterIds.push(character.id));
       let clip = {
@@ -113,15 +120,13 @@ class ClipForm extends React.Component {
         episode: Number(this.state.episodes[this.state.episode].id),
         characters: characterIds
       };
+      this.setState({ isRecaptchaOpen: false });
       API.addClip(clip).then(response => {
         this.setState({ isFormSucces: true });
         setTimeout(() => this.setState({ isFormSucces: false }), 3000);
         this.clearForm();
         this.handleClose();
       });
-    } else {
-      this.setState({ isFormError: true });
-    }
   };
 
   handleClose = () => {
@@ -219,7 +224,7 @@ class ClipForm extends React.Component {
               <Typography variant="h6" color="inherit" className={classes.flex}>
                 Añadir Clip
               </Typography>
-              <Button color="inherit" onClick={this.handleSubmit}>
+              <Button color="inherit" onClick={this.handleRecaptcha}>
                 Guardar
               </Button>
             </Toolbar>
@@ -323,8 +328,9 @@ class ClipForm extends React.Component {
             </Typography>
           </div>
           <Recaptcha 
-            open={this.state.isRecaptchaOpen === false}
+            open={this.state.isRecaptchaOpen}
             onClose={this.handleCloseRecaptcha}
+            onSubmit={this.handleSubmit}
           />
           <MySnackbar 
             open={this.state.isFormSucces} 
