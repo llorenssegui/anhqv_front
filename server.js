@@ -3,6 +3,8 @@ const request = require('request');
 const path = require('path');
 const port = process.env.PORT || 8080;
 
+console.log('Port: ' + port);
+
 const app = express();
 
 // Serve the static files from the React app
@@ -13,6 +15,6 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.listen(port);
+app.listen(port, '0.0.0.0');
 
 console.log('App is listening on port ' + port);
