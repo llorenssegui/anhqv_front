@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import ReCAPTCHA from "react-google-recaptcha";
 
+
 const TEST_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || "";
 
 class Recaptcha extends React.Component {
