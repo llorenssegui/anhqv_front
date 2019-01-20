@@ -15,6 +15,7 @@ const styles = {
     },
     grow: {
       flexGrow: 1,
+      cursor: 'pointer'
     },
     menuButton: {
       marginLeft: -12,
@@ -28,6 +29,10 @@ class Header extends React.Component {
         super(props);
     }
 
+    redirectToHome = () => {
+        window.location = "/";
+    };
+
     render() {
         const { classes } = this.props;
         return (
@@ -38,8 +43,7 @@ class Header extends React.Component {
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
-                    
-                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                        <Typography variant="h6" color="inherit" className={classes.grow} onClick={this.redirectToHome}>
                             Aqui no hay Quien Viva
                         </Typography>
                     </Toolbar>

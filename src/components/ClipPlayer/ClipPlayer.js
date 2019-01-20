@@ -14,15 +14,13 @@ const styles = {
       marginBottom: '150px',
       marginRight: '15px',
       marginLeft: '15px',
+      cursor: 'pointer',
     },
     bigAvatar: {
         margin: 10,
         width: 60,
         height: 60,
     },
-    mousePointer: {
-        cursor: 'pointer',
-    }
 };
 
 class ClipPlayer extends React.Component {
@@ -81,7 +79,7 @@ class ClipPlayer extends React.Component {
                 <Grid container justify="center" alignItems="center">
                 {this.state.characters.map(character => {
                     return(
-                        <Grid item xs={1} onClick={() =>this.onClickCharacter(character)}>
+                        <Grid item md={1} sm={3} xs={3} onClick={() =>this.onClickCharacter(character)}>
                             <Avatar alt={character.name} src={character.url_picture} className={classes.bigAvatar} />
                         </Grid> 
                     );
