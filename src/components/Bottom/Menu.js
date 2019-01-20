@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
+import SearchIcon from '@material-ui/icons/Search';
 
 const styles = {
   root: {
@@ -37,8 +37,8 @@ class Menu extends React.Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Personajes" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Búsqueda" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Personajes" icon={<AccessibilityIcon />} />
+        <BottomNavigationAction label="Búsqueda" icon={<SearchIcon />} />
       </BottomNavigation>
     );
   }
