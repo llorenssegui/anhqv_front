@@ -14,7 +14,7 @@ const styles = {
   },
   media: {
     height: 140,
-    width: 345,
+    width: 325,
     textAlign: 'center',
   },
 };
