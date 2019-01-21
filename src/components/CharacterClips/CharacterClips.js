@@ -6,6 +6,7 @@ import API from '../../api/API.js';
 import Grid from '@material-ui/core/Grid';
 import CharacterProfile from '../Characters/CharacterProfile.js';
 import LoadingGif from '../LoadingGif/LoadingGif.js';
+import Message from '../Message/Message.js';
 
 const styles = theme => ({
     root: {
@@ -17,6 +18,8 @@ const styles = theme => ({
     },
 });
 
+const NOT_FOUND_CLIPS_MESSAGE = "Todavía no se han añadido clips a este personaje";
+const ADD_CLIP_MESSAGE = "Para añadir un clip pulsa sobre el botón flotante situado en la parte inferior-derecha";
 
 class CharacterClips extends React.Component {
 
@@ -60,6 +63,12 @@ class CharacterClips extends React.Component {
                 <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
             </Grid>
             <LoadingGif show={this.state.showLoading}></LoadingGif>
+            {this.state.clips.length < 1 &&
+                <Message 
+                    text={NOT_FOUND_CLIPS_MESSAGE}
+                    subText={ADD_CLIP_MESSAGE}
+                />
+            }
             </div>
         );
     }
