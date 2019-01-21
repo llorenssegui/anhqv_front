@@ -31,7 +31,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "npm run build ",
+    "heroku-postbuild": "webpack --mode production ",
+    "postinstall": "webpack --mode production",
     "startDev": "npm run buildDev && node server.js",
     "build": "webpack --mode production",
     "buildDev": "webpack-dev-server",
