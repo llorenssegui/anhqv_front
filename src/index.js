@@ -16,7 +16,7 @@ const theme = createMuiTheme({
         error: red
     },
     typography: {
-        fontFamily: '"Comic Sans MS"',
+        fontFamily: 'Architects Daughter',
     },
 });
 
