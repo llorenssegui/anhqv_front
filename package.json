@@ -30,7 +30,8 @@
     "webpack-dev-server": "^3.1.13"
   },
   "scripts": {
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "npm run build ",
     "startDev": "npm run buildDev && node server.js",
     "build": "webpack --mode production",
     "buildDev": "webpack-dev-server",
