@@ -44,7 +44,7 @@ class Header extends React.Component {
                         <MenuIcon />
                     </IconButton>
                         <Typography variant="h6" color="inherit" className={classes.grow} onClick={this.redirectToHome}>
-                            Aqui no hay Quien Viva
+                            Aqui No Hay Quien Viva
                         </Typography>
                     </Toolbar>
                 </AppBar>

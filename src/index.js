@@ -14,6 +14,9 @@ const theme = createMuiTheme({
         secondary: orange,
         error: red
     },
+    typography: {
+        fontFamily: "Comic Sans MS"
+    },
 });
 
 let t = process.env.API_URL;

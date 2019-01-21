@@ -44,9 +44,16 @@ class Clip extends React.Component {
                         </Typography>
                     </Grid>
                     <Grid item md={1} sm={12}>
-                        <IconButton aria-label="Play">
-                            <PlayArrowIcon className={classes.playIcon} />
-                        </IconButton>
+                        <Grid
+                            container
+                            direction="column"
+                            justify="center"
+                            alignItems="center"
+                        >
+                            <IconButton aria-label="Play">
+                                <PlayArrowIcon className={classes.playIcon} />
+                            </IconButton>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Paper>
