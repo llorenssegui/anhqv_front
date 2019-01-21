@@ -5,21 +5,28 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import SearchIcon from '@material-ui/icons/Search';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import Search from '../Search/Search.js';
+import Body from '../Body/Body.js';
 
 const styles = {
   root: {
     width: '100%',
     overflow: 'hidden',
     position: 'fixed',
-    bottom: 0
+    bottom: 0,
   }
 };
 
 class Menu extends React.Component {
   
-    state = {
+  state = {
     value: 0,
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -31,15 +38,28 @@ class Menu extends React.Component {
     const { value } = this.state;
 
     return (
-      <BottomNavigation
-        value={value}
-        onChange={this.handleChange}
-        showLabels
-        className={classes.root}
-      >
-        <BottomNavigationAction label="Personajes" icon={<AccessibilityIcon />} />
-        <BottomNavigationAction label="Búsqueda" icon={<SearchIcon />} />
-      </BottomNavigation>
+      <Router>
+        <div>
+        <BottomNavigation
+          value={value}
+          showLabels
+          className={classes.root}
+        >
+          <BottomNavigationAction
+            label="Personajes" 
+            icon={<AccessibilityIcon />}
+            component={Link}
+            to="/personajes"
+          />
+          <BottomNavigationAction 
+            label="Búsqueda" 
+            icon={<SearchIcon />}
+            component={Link}
+            to="/busqueda"
+          />
+        </BottomNavigation>
+        </div>
+      </Router>
     );
   }
 }

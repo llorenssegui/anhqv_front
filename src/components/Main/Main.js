@@ -19,7 +19,7 @@ class Main extends React.Component {
                   <Route exact path='/personajes' component={Body} />
                   <Route exact path='/personajes/:characterId/clips' component={CharacterClips} />
                   <Route exact path='/clips/:clipId' component={ClipPlayer} />
-                  <Route exact path='/search' component={Search} />
+                  <Route exact path='/busqueda' component={Search} />
                </Switch>
             </BrowserRouter>
         );

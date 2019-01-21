@@ -51,6 +51,7 @@ class App extends React.Component {
                     open={this.state.showClipForm}
                     handleClose={this.unshowClipForm}
                 />
+                
             </MuiThemeProvider>
         );
     }

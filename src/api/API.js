@@ -39,5 +39,11 @@ export default {
             headers: functions.buildHeaders(),
             body: JSON.stringify(clip)
         }).then(res => res.json());
+    },
+    clipsSearch: (query) => {
+        return fetch(HOST + '/clips-search/?query=' + encodeURIComponent(query), {
+            method: 'GET',
+            headers: functions.buildHeaders()
+        }).then(res => res.json());
     }
 };
