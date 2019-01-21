@@ -221,7 +221,7 @@ class ClipForm extends React.Component {
                 <CloseIcon />
               </IconButton>
               <Typography variant="h6" color="inherit" className={classes.flex}>
-                Añadir Clip
+                Añadir Clip.
               </Typography>
               <Button color="inherit" onClick={this.handleRecaptcha}>
                 Guardar
