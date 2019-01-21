@@ -26,11 +26,13 @@ class Clips extends React.Component {
         return (
             <Grid container>
                 {this.props.clips.map(clip => {
-                    return(
-                    <Grid item md={6} sm={12} style={{width: '100%'}}>
-                        <Clip clip={clip} onClickClip={this.onClickClip} />
-                    </Grid>
-                    );
+                    if(clip.validated === undefined || clip.validated === true) {
+                        return(
+                        <Grid item md={6} sm={12} style={{width: '100%'}}>
+                            <Clip clip={clip} onClickClip={this.onClickClip} />
+                        </Grid>
+                        );
+                    }
                 })}
             </Grid>
         );

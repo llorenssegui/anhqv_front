@@ -8,7 +8,8 @@ class VideoFrame extends React.Component {
     }
 
     onReadyVideo = (event) => {
-        //event.target.pauseVideo();
+        event.target.playVideo();
+        this.props.onReadyVideo();
     };
 
     render () {

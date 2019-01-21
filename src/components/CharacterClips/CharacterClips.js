@@ -29,18 +29,22 @@ class CharacterClips extends React.Component {
             clips: [],
             characterName: undefined,
             characterUrlPicture: undefined,
-            showLoading: true
+            showLoading: true,
+            validatedClips: 0
         }
     }
 
     componentWillMount = () => {
         API.getCharacter(Number(this.props.match.params.characterId)).then(response => {
+            let validatedClips = response.clips.filter(clip => clip.validated === undefined || clip.validated === true);
             this.setState({
                 clips: response.clips,
                 characterName: response.name,
                 characterUrlPicture: response.url_picture,
-                showLoading: false
+                showLoading: false,
+                validatedClips: validatedClips.length,
             });
+            
         });
     };
 
@@ -63,7 +67,7 @@ class CharacterClips extends React.Component {
                 <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
             </Grid>
             <LoadingGif show={this.state.showLoading}></LoadingGif>
-            {this.state.clips.length < 1 && this.state.showLoading === false &&
+            {this.state.validatedClips < 1 &&
                 <Message 
                     text={NOT_FOUND_CLIPS_MESSAGE}
                     subText={ADD_CLIP_MESSAGE}

@@ -6,6 +6,7 @@ import API from '../../api/API.js';
 import Utils from '../../utils/Utils.js';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import LoadingGif from '../LoadingGif/LoadingGif.js';
 
 const styles = {
     root: {
@@ -34,6 +35,8 @@ class ClipPlayer extends React.Component {
             clip: undefined,
             characters: [],
             opts: undefined,
+            videoLoad: true,
+            showVideo: false
         };
     }
 
@@ -41,7 +44,7 @@ class ClipPlayer extends React.Component {
         let clipId =  this.props.match.params.clipId;
         API.getClip(Number(clipId)).then(response => {
             let opts = {
-                height: '600px',
+                height: '500px',
                 width: '100%',
                 playerVars: { 
                     autoplay: 1,
@@ -63,6 +66,10 @@ class ClipPlayer extends React.Component {
        this.props.history.push("/personajes/" + charcter.id + "/clips");
     };
 
+    onReadyVideo = () => {
+        this.setState({ videoLoad: false, showVideo: true });
+    };
+
     render() {
         const { classes } = this.props;
         return(
@@ -74,7 +81,11 @@ class ClipPlayer extends React.Component {
                     alignItems="center"
                     style={{height: '600px', width: '100%'}}
                 >
-                    <VideoFrame videoId={this.state.videoId} opts={this.state.opts}></VideoFrame>
+                    <VideoFrame 
+                        videoId={this.state.videoId} 
+                        opts={this.state.opts}
+                        onReadyVideo={this.onReadyVideo}
+                    />
                 </Grid>
                 <Grid container justify="center" alignItems="center">
                 {this.state.characters.map(character => {
