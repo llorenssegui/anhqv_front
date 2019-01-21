@@ -122,10 +122,9 @@ class ClipForm extends React.Component {
       };
       this.setState({ isRecaptchaOpen: false });
       API.addClip(clip).then(response => {
-        this.setState({ isFormSucces: true });
-        setTimeout(() => this.setState({ isFormSucces: false }), 3000);
         this.clearForm();
         this.handleClose();
+        this.props.onSubmit();
       });
   };
 

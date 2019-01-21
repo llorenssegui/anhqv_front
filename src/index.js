@@ -8,6 +8,7 @@ import FloatingActionButton from './components/FloatingActionButtons/FloatingAct
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { orange, red } from '@material-ui/core/colors';
 import createHistory from 'history/createBrowserHistory';
+import MySnackbar from './components/Snackbar/MySnackbar.js';
 
 const theme = createMuiTheme({
     palette: {
@@ -19,6 +20,8 @@ const theme = createMuiTheme({
         fontFamily: 'Architects Daughter',
     },
 });
+
+const SUCCESS_CLIP_FORM_MESSAGE = "Clip creado correctamente! Una vez validado se publicará en el portal.";
 
 class App extends React.Component {
 
@@ -55,6 +58,16 @@ class App extends React.Component {
         this.setState({showClipForm: false});
     };
 
+    onSubmitClipForm = () => {
+        this.setState({ isFormSucces: true });
+        setTimeout(function(){ this.setState({ isFormSucces: false }); }, 3000);
+        this.unshowClipForm();
+    };
+
+    onCloseSnackbar = () => {
+        this.setState({ isFormSucces: false });
+    };
+
     render () {
         return (
             <MuiThemeProvider theme={theme}>
@@ -65,7 +78,13 @@ class App extends React.Component {
                 <ClipForm   
                     open={this.state.showClipForm}
                     handleClose={this.unshowClipForm}
-                />    
+                    onSubmit={this.onSubmitClipForm}
+                />  
+                <MySnackbar 
+                    open={this.state.isFormSucces} 
+                    text={SUCCESS_CLIP_FORM_MESSAGE}
+                    onClose={this.onCloseSnackbar}
+                />  
             </MuiThemeProvider>
         );
     }
