@@ -7,6 +7,7 @@ import ClipForm from './components/Clips/ClipForm.js';
 import FloatingActionButton from './components/FloatingActionButtons/FloatingActionButton.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { orange, red } from '@material-ui/core/colors';
+import createHistory from 'history/createBrowserHistory';
 
 const theme = createMuiTheme({
     palette: {
@@ -29,10 +30,23 @@ class App extends React.Component {
             menuSection: 0,
             showClipForm: false
         };
+        this.history = createHistory({forceRefresh: true});
+    }
+
+    componentWillMount = () => {
+        if(this.history.location.pathname.indexOf("busqueda") !== -1) {
+            this.setState({menuSection: 1});
+        }
     }
 
     onChangeMenuSection = (value) => {
         this.setState({menuSection: value});
+        if(value === 0) {
+            this.history.push("/personajes");
+        } else if(value === 1) {
+            this.history.push("/busqueda");
+        }
+        this.history.go(1);
     };
 
     deployClip = () => {
@@ -48,13 +62,12 @@ class App extends React.Component {
             <MuiThemeProvider theme={theme}>
                 <Header></Header>
                 <Main></Main>
-                <Menu onChange={this.onChangeMenuSection}></Menu>
+                <Menu onChange={this.onChangeMenuSection} menuSection={this.state.menuSection}></Menu>
                 <FloatingActionButton onClickButton={this.deployClip}></FloatingActionButton>
                 <ClipForm   
                     open={this.state.showClipForm}
                     handleClose={this.unshowClipForm}
-                />
-                
+                />    
             </MuiThemeProvider>
         );
     }

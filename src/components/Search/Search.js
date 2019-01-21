@@ -29,7 +29,7 @@ class Search extends React.Component {
             showLoading: false,
             messageText: SEARCH_MESSAGE,
             showMessage: true
-        }
+        };
     }
 
     componentWillMount = () => {
