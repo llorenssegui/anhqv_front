@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Body from '../Body/Body.js'
+import createHistory from 'history/createBrowserHistory';
 
 const styles = {
     root: {
@@ -27,10 +27,11 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
+        this.history = createHistory({forceRefresh: true});
     }
 
     redirectToHome = () => {
-        window.location = "/";
+        this.history.push("/");
     };
 
     render() {
