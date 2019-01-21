@@ -12,12 +12,13 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    margin: '1.5%',
   },
   avatar: {
     margin: 10,
   },
   mouse: {
-    cursor: 'pointer'
+    cursor: 'pointer',
   }
 });
 
@@ -35,7 +36,6 @@ class Clip extends React.Component {
         const { classes } = this.props;
         return (
             <div className={classes.mouse}>
-            
             <Paper className={classes.root} elevation={1} onClick={this.onClickClip}>
                 <Grid container>
                     <Grid item md={11} sm={12}>

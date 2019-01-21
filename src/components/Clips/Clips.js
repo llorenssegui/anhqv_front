@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
-    
+
 };
 
 class Clips extends React.Component {
@@ -24,11 +24,11 @@ class Clips extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container spacing={24}>
+            <Grid container>
                 {this.props.clips.map(clip => {
                     return(
-                    <Grid item md={6} sm={12}>
-                        <Clip clip={clip} onClickClip={this.onClickClip} className={classes.mouse}></Clip>
+                    <Grid item md={6} sm={12} style={{width: '100%'}}>
+                        <Clip clip={clip} onClickClip={this.onClickClip} />
                     </Grid>
                     );
                 })}

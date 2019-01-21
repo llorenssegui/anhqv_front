@@ -63,7 +63,7 @@ class CharacterClips extends React.Component {
                 <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
             </Grid>
             <LoadingGif show={this.state.showLoading}></LoadingGif>
-            {this.state.clips.length < 1 &&
+            {this.state.clips.length < 1 && this.state.showLoading === false &&
                 <Message 
                     text={NOT_FOUND_CLIPS_MESSAGE}
                     subText={ADD_CLIP_MESSAGE}

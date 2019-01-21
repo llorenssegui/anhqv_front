@@ -9,19 +9,11 @@ import LoadingGif from '../LoadingGif/LoadingGif.js';
 import QueryString from 'query-string';
 import Message from '../Message/Message.js';
 
-const styles = {
-    root: {
-        margin: '20px',
-    },
+const styles = theme => ({
     searchboxContainer: {
-        width: 400,
-        textAlign: 'center',
-        margin: '20px'
-    },
-    clipsContainer: {
-        margin: '15px',
+        margin: theme.spacing.unit + 3,
     }
-};
+});
 
 const SEARCH_MESSAGE = "Formulario de búsqueda de clips por título";
 const CLIPS_NOT_FOUND_MESSAGE = "No se han encontrado clips"
@@ -56,7 +48,6 @@ class Search extends React.Component {
     };
 
     clipsSearchRequest = (query) => {
-        debugger;
         if(query) {
             let url = "/busqueda";
             if(query != '') {
@@ -65,7 +56,6 @@ class Search extends React.Component {
             this.props.history.push(url);
             this.setState({ showLoading: true });
             API.clipsSearch(query).then(response => {
-                debugger;
                 this.handleMessageText(response);
                 this.setState({ clips: response, showLoading: false });
             });
@@ -98,7 +88,6 @@ class Search extends React.Component {
             <div>
                 <Grid 
                     container 
-                    spacing={24} 
                 >
                     <Grid item xs={12}>
                         <Grid
@@ -117,17 +106,15 @@ class Search extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid 
-                    container 
-                    spacing={24}
-                    className={classes.clipsContainer}
-                >
-                    <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
-                </Grid>
+                <Clips clips={this.state.clips} onClickClip={this.onClickClip}></Clips>
                 {this.state.showMessage &&
+                    <Grid 
+                    container 
+                    className={classes.clipsContainer}>
                     <Message 
                         text={this.state.messageText}
                     />
+                    </Grid>
                 }
             </div>
         );
