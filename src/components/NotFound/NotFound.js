@@ -23,7 +23,7 @@ class NotFound extends React.Component {
                     </Grid>
                     <Grid container justify="center">
                         <Typography variant="display1" gutterBottom>
-                            Pàgina no disponible
+                            Página no disponible
                         </Typography>
                     </Grid>
                 </Grid>
