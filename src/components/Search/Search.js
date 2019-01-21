@@ -12,6 +12,7 @@ import Message from '../Message/Message.js';
 const styles = theme => ({
     searchboxContainer: {
         margin: theme.spacing.unit + 3,
+        width: 350
     }
 });
 
