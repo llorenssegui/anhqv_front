@@ -42,6 +42,10 @@ class ClipPlayer extends React.Component {
     componentWillMount = () => {
         let clipId =  this.props.match.params.clipId;
         API.getClip(Number(clipId)).then(response => {
+            if(response === undefined || response.start === undefined) {
+                this.props.history.push("/error");
+                return;
+            }
             let opts = {
                 height: '500px',
                 width: '100%',
@@ -54,7 +58,7 @@ class ClipPlayer extends React.Component {
             };
             this.setState({
                 clip: response,
-                characters: response.characters,
+                characters: response.characters || [],
                 videoId: Utils.getYoutubeVideoId(response.link),
                 opts: opts
             });
