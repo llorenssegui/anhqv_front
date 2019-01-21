@@ -28,7 +28,7 @@ class App extends React.Component {
             menuSection: 0,
             showClipForm: false
         };
-        this.history = createHistory({forceRefresh: true});
+        this.history = createHistory();
     }
 
     componentWillMount = () => {
@@ -44,7 +44,7 @@ class App extends React.Component {
         } else if(value === 1) {
             this.history.push("/busqueda");
         }
-        this.history.go(1);
+        location.reload();
     };
 
     deployClip = () => {

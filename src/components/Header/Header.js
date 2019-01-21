@@ -27,11 +27,12 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.history = createHistory({forceRefresh: true});
+        this.history = createHistory();
     }
 
     redirectToHome = () => {
         this.history.push("/");
+        location.reload();
     };
 
     render() {
