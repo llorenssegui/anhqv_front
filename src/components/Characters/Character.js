@@ -13,8 +13,7 @@ const styles = {
     textAlign: 'center',
   },
   media: {
-    height: 140,
-    width: 325,
+    height: 300,
     textAlign: 'center',
   },
 };
