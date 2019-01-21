@@ -22,4 +22,25 @@ export default {
         }
         return seconds;
     },
+    updateMetadata: (document, title, image) => {
+        if(document) {
+            let url = window.location.href;
+            if(url && url != "") document.getElementsByName('twitter:url')[0].setAttribute('content',url);
+            if(title && title != "") document.getElementsByName('twitter:title')[0].setAttribute('content',title);
+            if(image && image != "") document.getElementsByName('twitter:image')[0].setAttribute('content',image);
+            document.getElementsByName('twitter:description')[0].setAttribute('content',"");
+
+            if(url && url != "") document.querySelector('[property="og:url"]').setAttribute('content', url);
+            if(title && title != "") document.querySelector('[property="og:title"]').setAttribute('content', title);
+            if(image && image != "") document.querySelector('[property="og:image"]').setAttribute('content', image);
+            document.querySelector('[property="og:description"]').setAttribute('content', "");
+        }
+    },
+    buildMetaImageFromYoutubeID: (id) => {
+        let image = "";
+        if(id) {
+            image = "https://img.youtube.com/vi/" + id + "/sddefault.jpg";
+        }
+        return image;
+    },
 };

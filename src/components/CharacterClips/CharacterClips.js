@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Clips from '../Clips/Clips.js';
 import API from '../../api/API.js';
+import Utils from '../../utils/Utils.js';
 import Grid from '@material-ui/core/Grid';
 import CharacterProfile from '../Characters/CharacterProfile.js';
 import LoadingGif from '../LoadingGif/LoadingGif.js';
@@ -45,7 +46,7 @@ class CharacterClips extends React.Component {
                 showLoading: false,
                 validatedClips: validatedClips.length,
             });
-            
+            Utils.updateMetadata(document, response.name, response.url_picture);
         }).catch(() => {
             this.props.history.push("/error");
             return;

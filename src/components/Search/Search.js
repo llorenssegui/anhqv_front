@@ -16,7 +16,7 @@ const styles = theme => ({
     }
 });
 
-const SEARCH_MESSAGE = "Formulario de búsqueda de clips por título";
+const SEARCH_MESSAGE = "Introduce un criterio de búsqueda";
 const CLIPS_NOT_FOUND_MESSAGE = "No se han encontrado clips"
 
 class Search extends React.Component {

@@ -6,6 +6,7 @@ import API from '../../api/API.js';
 import Utils from '../../utils/Utils.js';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
     root: {
@@ -35,7 +36,8 @@ class ClipPlayer extends React.Component {
             characters: [],
             opts: undefined,
             videoLoad: true,
-            showVideo: false
+            showVideo: false,
+            clipTitle: ''
         };
     }
 
@@ -63,10 +65,12 @@ class ClipPlayer extends React.Component {
             };
             this.setState({
                 clip: response,
+                clipTitle: response.title,
                 characters: response.characters || [],
                 videoId: Utils.getYoutubeVideoId(response.link),
                 opts: opts
             });
+            Utils.updateMetadata(document, response.title, Utils.buildMetaImageFromYoutubeID(Utils.getYoutubeVideoId(response.link)));
         }).catch(() => {
             this.props.history.push("/error");
             return;
@@ -92,6 +96,9 @@ class ClipPlayer extends React.Component {
                     alignItems="center"
                     style={{height: '600px', width: '100%'}}
                 >
+                    <Typography variant="h5" component="h3">
+                    {this.state.clipTitle}
+                    </Typography>
                     <VideoFrame 
                         videoId={this.state.videoId} 
                         opts={this.state.opts}
