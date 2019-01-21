@@ -53,7 +53,12 @@ class ClipPlayer extends React.Component {
                     autoplay: 1,
                     start: response.start,
                     end: response.end,
-
+                    controls: 0,
+                    disablekb: 0,
+                    showinfo: 0,
+                    fs: 0,
+                    cc_load_policy: 0,
+                    rel: 0
                 }
             };
             this.setState({

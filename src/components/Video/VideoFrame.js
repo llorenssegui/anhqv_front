@@ -8,7 +8,7 @@ class VideoFrame extends React.Component {
     }
 
     onReadyVideo = (event) => {
-        event.target.playVideo();
+        //event.target.playVideo();
         this.props.onReadyVideo();
     };
 
@@ -18,6 +18,10 @@ class VideoFrame extends React.Component {
                 videoId={this.props.videoId}
                 opts={this.props.opts}
                 onReady={this.onReadyVideo}
+                autoplay={true}
+                showRelatedVideos={false}
+                showInfo={false}
+                controls={false}
             />
         );
     }
