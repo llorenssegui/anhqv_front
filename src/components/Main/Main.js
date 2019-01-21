@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Body from '../Body/Body.js';
 import CharacterClips from '../CharacterClips/CharacterClips.js';
 import Search from '../Search/Search.js';
+import NotFound from '../NotFound/NotFound.js';
 import ClipPlayer from '../ClipPlayer/ClipPlayer.js';
 
 class Main extends React.Component {
@@ -20,6 +21,8 @@ class Main extends React.Component {
                   <Route exact path='/personajes/:characterId/clips' component={CharacterClips} />
                   <Route exact path='/clips/:clipId' component={ClipPlayer} />
                   <Route exact path='/busqueda' component={Search} />
+                  <Route exact path='/error' component={NotFound}/> 
+                  <Route component={NotFound}/> 
                </Switch>
             </BrowserRouter>
         );

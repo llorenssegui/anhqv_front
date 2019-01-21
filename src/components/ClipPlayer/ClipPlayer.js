@@ -6,7 +6,6 @@ import API from '../../api/API.js';
 import Utils from '../../utils/Utils.js';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import LoadingGif from '../LoadingGif/LoadingGif.js';
 
 const styles = {
     root: {
@@ -59,6 +58,9 @@ class ClipPlayer extends React.Component {
                 videoId: Utils.getYoutubeVideoId(response.link),
                 opts: opts
             });
+        }).catch(() => {
+            this.props.history.push("/error");
+            return;
         });
     };
 
