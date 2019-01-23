@@ -52,7 +52,6 @@ class ClipPlayer extends React.Component {
                 height: '500px',
                 width: '100%',
                 playerVars: { 
-                    autoplay: 1,
                     start: response.start,
                     end: response.end,
                     controls: 0,

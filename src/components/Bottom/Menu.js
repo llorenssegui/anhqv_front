@@ -5,6 +5,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import SearchIcon from '@material-ui/icons/Search';
+import LinkIcon from '@material-ui/icons/Link';
 
 const styles = {
   root: {
@@ -14,6 +15,8 @@ const styles = {
     bottom: 0,
   }
 };
+
+const pchooser_url = process.env.PRESIDENT_CHOOSER_URL || "";
 
 class Menu extends React.Component {
   
@@ -31,8 +34,13 @@ class Menu extends React.Component {
   }
 
   handleChange = (event, value) => {
-    this.setState({ value });
-    if(this.props.onChange) this.props.onChange(value);
+    if(value !== 2) {
+      this.setState({ value });
+      if(this.props.onChange) this.props.onChange(value);
+    } else {
+      let win = window.open(pchooser_url, '_blank');
+      win.focus();
+    }
   };
 
   render() {
@@ -54,6 +62,10 @@ class Menu extends React.Component {
           <BottomNavigationAction 
             label="Búsqueda" 
             icon={<SearchIcon />}
+          />
+          <BottomNavigationAction 
+            label="President Chooser" 
+            icon={<LinkIcon />}
           />
         </BottomNavigation>
         </div>
