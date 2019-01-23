@@ -58,7 +58,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/dist');
 
 app.get('/personajes/:idPersonaje/clips', (req,res) =>{
-    let url = HOST_API + '/api/characters/' + req.params.idPersonaje;
+    let url = HOST_API + '/characters/' + req.params.idPersonaje;
     request(url, { json: true }, (error, response, body) => {
         if(error) {
             res.render('mustache', defaultMustacheData);
@@ -71,7 +71,7 @@ app.get('/personajes/:idPersonaje/clips', (req,res) =>{
 });
 
 app.get('/clips/:idClip', (req,res) =>{
-    let url = HOST_API + '/api/clips/' + req.params.idClip;
+    let url = HOST_API + '/clips/' + req.params.idClip;
     request(url, { json: true }, (error, response, body) => {
         if(error) {
             res.render('mustache', defaultMustacheData);
