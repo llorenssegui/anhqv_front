@@ -46,7 +46,7 @@ class CharacterClips extends React.Component {
                 showLoading: false,
                 validatedClips: validatedClips.length,
             });
-            Utils.updateMetadata(document, response.name, response.url_picture);
+            //Utils.updateMetadata(document, response.name, response.url_picture);
         }).catch(() => {
             this.props.history.push("/error");
             return;

@@ -69,7 +69,7 @@ class ClipPlayer extends React.Component {
                 videoId: Utils.getYoutubeVideoId(response.link),
                 opts: opts
             });
-            Utils.updateMetadata(document, response.title, Utils.buildMetaImageFromYoutubeID(Utils.getYoutubeVideoId(response.link)));
+            //Utils.updateMetadata(document, response.title, Utils.buildMetaImageFromYoutubeID(Utils.getYoutubeVideoId(response.link)));
         }).catch(() => {
             this.props.history.push("/error");
             return;

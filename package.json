@@ -15,6 +15,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "history": "^4.7.2",
+    "mustache-express": "^1.2.8",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
