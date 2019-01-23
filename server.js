@@ -64,6 +64,7 @@ app.get('/personajes/:idPersonaje/clips', (req,res) =>{
             return;
         }
         let mustacheData = functions.buildDataMustache(req, body.name, body.name, body.url_picture);
+        console.log(JSON.stringify(mustacheData));
         res.render('mustache', mustacheData);
     });
 });
