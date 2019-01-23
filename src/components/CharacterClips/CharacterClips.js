@@ -37,7 +37,6 @@ class CharacterClips extends React.Component {
 
     componentWillMount = () => {
         API.getCharacter(Number(this.props.match.params.characterId)).then(response => {
-            debugger;
             let validatedClips = response.clips.filter(clip => clip.validated === undefined || clip.validated === true);
             this.setState({
                 clips: response.clips,
