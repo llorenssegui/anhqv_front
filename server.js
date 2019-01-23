@@ -13,6 +13,7 @@ let env = dotenv.config().parsed;
 
 if(env === undefined || env === null) env = process.env;
 const HOST_API = env.API_URL || "";
+console.log("API URL", HOST_API);
 
 let functions = {
     buildDataMustache: (req, title, description, image) => {
@@ -64,7 +65,7 @@ app.get('/personajes/:idPersonaje/clips', (req,res) =>{
             return;
         }
         let mustacheData = functions.buildDataMustache(req, body.name, body.name, body.url_picture);
-        console.log(JSON.stringify(mustacheData));
+        console.log(JSON.stringify(body));
         res.render('mustache', mustacheData);
     });
 });
