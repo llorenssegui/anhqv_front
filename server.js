@@ -65,7 +65,6 @@ app.get('/personajes/:idPersonaje/clips', (req,res) =>{
             return;
         }
         let mustacheData = functions.buildDataMustache(req, body.name, body.name, body.url_picture);
-        console.log(JSON.stringify(body));
         res.render('mustache', mustacheData);
     });
 });
@@ -77,7 +76,7 @@ app.get('/clips/:idClip', (req,res) =>{
             res.render('mustache', defaultMustacheData);
             return;
         }
-        let mustacheData = functions.buildDataMustache(req, body.title, body.title, functions.buildMetaImageFromYoutubeID(functions.getYoutubeVideoId(response.link)));
+        let mustacheData = functions.buildDataMustache(req, body.title, body.title, functions.buildMetaImageFromYoutubeID(functions.getYoutubeVideoId(body.link)));
         res.render('mustache', mustacheData);
     });
 });
