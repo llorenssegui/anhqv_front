@@ -39,7 +39,7 @@ class Searchbox extends React.Component {
     };
 
     onClickSearch = () => {
-        this.props.onClickSearch();
+        if(this.props.onClickSearch) this.props.onClickSearch();
     };
 
     keyPress = (event) => {
@@ -55,7 +55,7 @@ class Searchbox extends React.Component {
                 <InputBase 
                     name="search" 
                     className={classes.input} 
-                    placeholder="Buscar clip"
+                    placeholder={this.props.placeholder}
                     onChange={this.handleChange}
                     onKeyPress={this.keyPress}
                  />

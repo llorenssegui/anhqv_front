@@ -101,6 +101,7 @@ class Search extends React.Component {
                                 <Searchbox
                                     onChange={this.onSearchboxChange}
                                     onClickSearch={this.onClickSearch}
+                                    placeholder={'Buscar clip'}
                                 />
                                 <LoadingGif show={this.state.showLoading}></LoadingGif>
                             </div>

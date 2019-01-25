@@ -76,7 +76,7 @@ app.get('/clips/:idClip', (req,res) =>{
             res.render('mustache', defaultMustacheData);
             return;
         }
-        let mustacheData = functions.buildDataMustache(req, body.title, body.title, functions.buildMetaImageFromYoutubeID(functions.getYoutubeVideoId(body.link)));
+        let mustacheData = functions.buildDataMustache(req, body.title, defaultMustacheData.title, functions.buildMetaImageFromYoutubeID(functions.getYoutubeVideoId(body.link)));
         res.render('mustache', mustacheData);
     });
 });
