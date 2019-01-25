@@ -5,14 +5,34 @@ const path = require('path');
 const port = process.env.PORT || 8080;
 const dotenv = require('dotenv');
 const utils = require('./server_utils/utils.js');
+var bodyParser = require('body-parser');
 console.log('Port: ' + port);
 
 const app = express();
+app.use(bodyParser.json());
 
 let env = dotenv.config().parsed;
 
 if(env === undefined || env === null) env = process.env;
 const HOST_API = env.API_URL || "";
+const HOST_API_URL_PROXY_MODULE = env.API_URL_PROXY_MODULE || "";
+
+/* Proxy: Calls to API REST */
+app.get('/apiprx/*', (req, res) => {
+    let url_request = req.protocol + "://" + req.get('host') + req.originalUrl;
+    url_request = url_request.replace(HOST_API, HOST_API_URL_PROXY_MODULE);
+    request(url_request, { json: true }, function(error, response, body) {
+        res.json(body)
+    });
+});
+
+app.post('/apiprx/*', (req, res) => {
+    let url_request = req.protocol + "://" + req.get('host') + req.originalUrl;
+    url_request = url_request.replace(HOST_API, HOST_API_URL_PROXY_MODULE);
+    request(url_request, {method: "POST", json: true, body: req.body }, function(error, response, body) {
+        res.json(body)
+    });
+});
 
 const defaultMustacheData = {
     url: "https://anhqv-clips.herokuapp.com/",
@@ -29,7 +49,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/dist');
 
 app.get('/personajes/:idPersonaje/clips', (req,res) =>{
-    let url = HOST_API + '/characters/' + req.params.idPersonaje;
+    let url = HOST_API_URL_PROXY_MODULE + '/characters/' + req.params.idPersonaje;
     request(url, { json: true }, (error, response, body) => {
         if(error) {
             res.render('mustache', defaultMustacheData);
@@ -41,7 +61,7 @@ app.get('/personajes/:idPersonaje/clips', (req,res) =>{
 });
 
 app.get('/clips/:idClip', (req,res) =>{
-    let url = HOST_API + '/clips/' + req.params.idClip;
+    let url = HOST_API_URL_PROXY_MODULE + '/clips/' + req.params.idClip;
     request(url, { json: true }, (error, response, body) => {
         if(error) {
             res.render('mustache', defaultMustacheData);
