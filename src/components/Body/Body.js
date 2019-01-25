@@ -55,6 +55,7 @@ class Body extends React.Component {
         const { classes } = this.props;
         return(
             <div className={classes.root}>
+            {this.state.showLoading === false &&
             <Grid 
                 container
                 className={classes.searchBoxContainer}
@@ -73,6 +74,7 @@ class Body extends React.Component {
                     </Grid>
                 </Grid>
             </Grid>
+            }
             <Characters characters={this.state.findCharacters} onClickCharacter={this.onClickCharacter}></Characters>
             <LoadingGif show={this.state.showLoading}></LoadingGif>
             </div>
