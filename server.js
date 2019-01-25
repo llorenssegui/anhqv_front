@@ -4,7 +4,7 @@ const mustacheExpress = require('mustache-express');
 const path = require('path');
 const port = process.env.PORT || 8080;
 const dotenv = require('dotenv');
-
+const utils = require('./server_utils/utils.js');
 console.log('Port: ' + port);
 
 const app = express();
@@ -13,35 +13,6 @@ let env = dotenv.config().parsed;
 
 if(env === undefined || env === null) env = process.env;
 const HOST_API = env.API_URL || "";
-console.log("API URL", HOST_API);
-
-let functions = {
-    buildDataMustache: (req, title, description, image) => {
-        let url = req.protocol + "://" + req.get('host') + req.originalUrl;
-        return {
-            url: url,
-            title: title,
-            description: description,
-            image: image
-        };
-    },
-    getYoutubeVideoId: (url) => {
-        try{
-            const REG_EXP = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-            let match = url.match(REG_EXP);
-            return (match && match[7].length == 11) ? match[7] : false;
-        } catch(e) {
-            return false;
-        }
-    },
-    buildMetaImageFromYoutubeID: (id) => {
-        let image = "";
-        if(id) {
-            image = "https://img.youtube.com/vi/" + id + "/sddefault.jpg";
-        }
-        return image;
-    }
-};
 
 const defaultMustacheData = {
     url: "https://anhqv-clips.herokuapp.com/",
@@ -64,7 +35,7 @@ app.get('/personajes/:idPersonaje/clips', (req,res) =>{
             res.render('mustache', defaultMustacheData);
             return;
         }
-        let mustacheData = functions.buildDataMustache(req, body.name, body.name, body.url_picture);
+        let mustacheData = utils.buildDataMustache(req, body.name, body.name, body.url_picture);
         res.render('mustache', mustacheData);
     });
 });
@@ -76,7 +47,7 @@ app.get('/clips/:idClip', (req,res) =>{
             res.render('mustache', defaultMustacheData);
             return;
         }
-        let mustacheData = functions.buildDataMustache(req, body.title, defaultMustacheData.title, functions.buildMetaImageFromYoutubeID(functions.getYoutubeVideoId(body.link)));
+        let mustacheData = utils.buildDataMustache(req, body.title, defaultMustacheData.title, utils.buildMetaImageFromYoutubeID(utils.getYoutubeVideoId(body.link)));
         res.render('mustache', mustacheData);
     });
 });

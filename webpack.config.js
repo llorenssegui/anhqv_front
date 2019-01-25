@@ -13,7 +13,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    './src/index.js'
+    './src/index.js',
   ],
   module: {
     rules: [
